@@ -1,0 +1,411 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}ANAC - Guide touristique{% endblock %}
+
+{% block content %}
+
+   <style>
+        .navbar {
+        background-color:rgb(192, 135, 106); /* Couleur beige */
+        
+        }     
+        .navbar .nav-link {
+        color: white; /* Texte blanc */
+        }
+
+        .nav-link.active {
+            background-color: #d8b7a6; /* Couleur nude claire */
+            color: white;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent noir */
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .dot-container {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #e2c2a1; /* Nude moyen */
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.6s ease;
+        }
+
+        .dot.active {
+            background-color: #c49e8f; /* Couleur nude plus foncée */
+        }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            color: #c49e8f; /* Nude foncé */
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #d8b7a6; /* Couleur nude claire */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #c49e8f; /* Nude foncé pour le hover */
+        }
+
+        /* Masquer le sous-menu par défaut */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            top: 100%; /* Affiche sous le lien */
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Afficher le sous-menu au survol de la souris */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Style du lien survolé */
+        .dropdown-item {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #e2c2a1; /* Couleur nude clair au survol */
+        }
+
+        /* Style pour le footer */
+        footer {
+        background-color: rgb(192, 135, 106); /* Couleur beige similaire à la barre de navigation */
+        color: white; /* Texte en blanc */
+        padding: 20px 0; /* Un peu d'espace autour du texte */
+        text-align: center; /* Centrer le texte dans le footer */
+        }
+
+        /* Pour les liens dans le footer */
+        footer a {
+            color: white; /* Liens en blanc */
+            text-decoration: none; /* Enlever le soulignement */
+            transition: color 0.3s ease;
+        }
+
+        /* Changement de couleur des liens au survol */
+        footer a:hover {
+            color: #c49e8f; /* Nude foncé au survol */
+        }
+        h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        text-align: center;
+        color: #ad8170; /* Couleur chaude, douce mais visible */
+        margin: 20px 0;
+        text-transform: capitalize; /* Remplacer les majuscules complètes par une capitalisation pour plus de douceur */
+        letter-spacing: 0.5px; /* Un léger espacement entre les lettres */
+        font-family: 'Georgia', serif; /* Une police plus élégante pour un effet plus raffiné */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Ombre légère pour donner du relief */
+        }
+
+
+        p {
+        max-width: 800px;
+        margin: 10px auto;
+        text-align: justify;
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.8;
+        }
+
+        a {
+        color:  #caa090;
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 2px solid transparent;
+        transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        a:hover {
+        color: #caa090;
+        border-bottom: 2px solid #caa090;
+        }
+
+        p a { 
+        font-style: italic;
+        }
+        h2.text-center {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ad8170; /* Harmonisé avec la couleur de l'h1 */
+        margin-bottom: 1.5rem; /* marges ajustées pour espacer du contenu suivant */
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-family: 'Arial', sans-serif;
+        position: relative;
+        }
+
+        h2.text-center::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background-color: #c49e8f; /* Correspond à la couleur nude foncée */
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Diaporama d'images -->
+        <div class="slideshow-container">
+            <div class="mySlides">
+                <img src="images/restaurant1.jpg" alt="Restaurant">
+                <div class="text">Découvrez les meilleurs restaurants !</div>
+            </div>
+            <div class="mySlides">
+                <img src="images/hotel3.png" alt="Hôtel">
+                <div class="text">Séjournez dans les hôtels les plus confortables !</div>
+            </div>
+            <div class="mySlides">
+                <img src="images/parc1.jpg" alt="Parc">
+                <div class="text">Explorez les parcs magnifiques de la France !</div>
+            </div>
+            <div class="mySlides">
+                <img src="images/musee-louvre.jpg" alt="Musee">
+                <div class="text">Découvrez les musées de France et plongez au cœur de l’histoire et de l’art !</div>
+            </div>
+
+        </div>
+        <script>
+    let slideIndex = 0;
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        
+        // Cacher toutes les diapositives
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        
+        // Incrémenter l'indice de la diapositive
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    // Recommence à la première diapositive
+
+        // Afficher la diapositive actuelle
+        slides[slideIndex - 1].style.display = "block";  
+
+        // Gérer les points de navigation
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        if (dots.length > 0) {
+            dots[slideIndex - 1].className += " active";
+        }
+
+        setTimeout(showSlides, 3000); // Changer d'image toutes les 3 secondes
+    }
+
+    showSlides(); // Démarrer le diaporama au chargement de la page
+</script>
+
+        <!-- Contenu de la page Accueil -->
+        <div class="container mt-4">
+        </br>
+           <div class="container mt-4">
+    <h1>Bienvenue sur ANAC, votre guide de voyage en France</h1></br>
+    <p>
+        ANAC est l'outil idéal pour vous accompagner tout au long de votre séjour en France. Que vous soyez en voyage d'affaires, en escapade romantique, en vacances en famille ou en quête d'aventure, notre application vous permet de trouver les meilleurs <a href="recherche.php?categorie=hotels">hôtels</a>, <a href="recherche.php?categorie=restaurants">restaurants</a>, <a href="recherche.php?categorie=musees">musées</a> et <a href="recherche.php?categorie=jardins">jardins</a>, tout en vous offrant un <a href="programme.php">programme détaillé</a> pour les villes célèbres.
+    </p>
+    <p>
+        Grâce à ANAC, vous pouvez facilement organiser votre séjour en accédant à des informations sur les <a href="recherche.php?categorie=hotels">hôtels</a> et <a href="recherche.php?categorie=restaurants">restaurants</a> qui correspondent à vos préférences. Profitez également des <a href="recherche.php?categorie=musees">musées</a> les plus emblématiques de chaque région et découvrez les plus beaux <a href="recherche.php?categorie=jardins">jardins</a> de France.
+    </p>
+    <p>
+        N'oubliez pas que vous pouvez aussi laisser un <a href="avis.php">avis</a> sur vos lieux préférés et partager vos expériences avec la communauté d'ANAC_APP.
+    </p>
+    
+</div>
+
+
+        <!-- Explorez les différentes catégories -->
+        <div class="container mt-5">
+        </br>
+            <h2 class="text-center mb-4">Explorez les différentes catégories</h2>
+            </br>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/hotel.jpg" class="card-img-top" alt="Hôtels">
+                        <div class="card-body">
+                            <h5 class="card-title">Hôtels</h5>
+                            <p class="card-text">Trouvez les meilleurs hôtels adaptés à vos besoins.</p>
+                            <a href="rechercheHotel.php?categorie=hotels" class="btn btn-primary">Explorer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/restaurant.jpg" class="card-img-top" alt="Restaurants">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurants</h5>
+                            <p class="card-text">Découvrez des restaurants de qualité près de chez vous.</p>
+                            <a href="rechercheRestaurant.php?categorie=restaurants" class="btn btn-primary">Explorer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/musee.jpg" class="card-img-top" alt="Musées">
+                        <div class="card-body">
+                            <h5 class="card-title">Musées</h5>
+                            <p class="card-text">Explorez les musées et enrichissez votre culture.</p>
+                            <a href="rechercheMusee.php?categorie=musees" class="btn btn-primary">Explorer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/jardin.jpg" class="card-img-top" alt="Jardins">
+                        <div class="card-body">
+                            <h5 class="card-title">Jardins</h5>
+                            <p class="card-text">Promenez-vous dans les plus beaux jardins.</p>
+                            <a href="rechercheJardin.php?categorie=jardins" class="btn btn-primary">Explorer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </br>
+
+        <p>
+        Que vous soyez à la recherche d'un hôtel de charme, d'un restaurant gastronomique, d'une exposition culturelle ou d'un jardin secret à découvrir, ANAC vous guide à chaque étape de votre voyage, pour que vous profitiez pleinement de tout ce que la France a à offrir.
+      </p>
+
+      </br>
+
+        <!-- Découvrez la France avec un Guide Conférencier -->
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Découvrez la France avec un Guide Conférencier</h2>
+            </br>
+            <div class="row">
+                <!-- Région 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/auvergne.jpg" class="card-img-top" alt="Auvergne Rhône Alpes">
+                        <div class="card-body">
+                            <h5 class="card-title">Auvergne Rhône Alpes</h5>
+                            <p class="card-text">
+                                Explorez cette magnifique région avec un guide conférencier. Découvrez des lieux uniques, participez à des visites guidées et vivez des excursions privées.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Région 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/bretagne.jpg" class="card-img-top" alt="Bretagne">
+                        <div class="card-body">
+                            <h5 class="card-title">Bretagne</h5>
+                            <p class="card-text">
+                                Partez à la découverte des paysages côtiers et des traditions bretonnes. Visites privées et excursions guidées disponibles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Région 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/corse.jpg" class="card-img-top" alt="Corse">
+                        <div class="card-body">
+                            <h5 class="card-title">Corse</h5>
+                            <p class="card-text">
+                                Découvrez l'Île de Beauté avec un guide privé. Explorez ses plages, montagnes et villages authentiques.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ligne 2 -->
+            <div class="row">
+                <!-- Région 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/grand-est.jpg" class="card-img-top" alt="Grand Est">
+                        <div class="card-body">
+                            <h5 class="card-title">Grand Est</h5>
+                            <p class="card-text">
+                                Explorez l'Alsace, la Lorraine et la Champagne avec un guide conférencier pour des expériences mémorables.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Région 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/ile-de-france.jpg" class="card-img-top" alt="Île de France">
+                        <div class="card-body">
+                            <h5 class="card-title">Île de France</h5>
+                            <p class="card-text">
+                                Découvrez les secrets de Paris et ses alentours avec des visites guidées enrichissantes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Région 6 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="images/normandie.jpg" class="card-img-top" alt="Normandie">
+                        <div class="card-body">
+                            <h5 class="card-title">Normandie</h5>
+                            <p class="card-text">
+                                Vivez l'histoire de la Normandie, ses plages du Débarquement et ses paysages pittoresques.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<p> Un secret vous attend… Tapez 'france' pour le découvrir !  </p>
+    
+
+{% endblock %}

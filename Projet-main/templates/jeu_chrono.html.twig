@@ -1,0 +1,123 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}City counter - Pays les plus peuplés{% endblock %}
+
+{% block content %}
+
+<style>
+
+      /* Fixe la navbar en haut avec fixed */
+    nav.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    /* Ajouter un padding-top pour compenser la hauteur de la navbar */
+    .content {
+        padding-top: 70px; /* Ajuste cette valeur en fonction de la hauteur de ta navbar */
+    }
+
+    /* Réinitialisation des marges et paddings par défaut */
+    body, html {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Styles de base */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    
+    /* Style du chronomètre */
+    #timer {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* Tableau avec animation */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .table-row {
+      opacity: 0;  /* Initialement invisible */
+      transform: translateY(20px);  /* Décalage vertical */
+      transition: opacity 0.5s ease, transform 0.5s ease;  /* Transition douce */
+    }
+
+    .table-row.visible {
+      opacity: 1;  /* Visible */
+      transform: translateY(0);  /* Retour à la position originale */
+    }
+
+    /* Style pour le champ de saisie */
+    #cityInput {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #c49e8f;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color:rgb(213, 185, 174);
+    }
+  </style>
+
+
+
+
+ <!-- Champ pour saisir une ville -->
+<input type="text" id="cityInput" placeholder="Entrez une ville">
+<button onclick="submitCity()">Ajouter la ville</button>
+
+<!-- Zone pour afficher les messages d'erreur -->
+<div id="errorText"></div>
+
+<!-- Zone pour afficher le score -->
+<h1 id="score"></h1>
+
+<!-- Message après la fin du jeu -->
+<h1 id="message"></h1>
+
+<!-- Tableau des villes -->
+<table id="cityTable">
+  <thead>
+    <tr>
+      <th>Ville</th>
+      <th>Population</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<!-- Timer -->
+<div id="timer">Temps restant : 90</div>
+
+
+  <script src="js/jeu_chrono.js?v=2"></script>
+
+{% endblock %}

@@ -1,0 +1,423 @@
+/* Réinitialisation de base */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Conteneur principal */
+.contenu {
+  display: flex;
+}
+
+/* Style de la barre de navigation */
+.navbar {
+  background-color: rgb(192, 135, 106); /* Beige clair */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-link {
+  color: white; /* Texte blanc */
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  background-color: #d8b7a6; /* Beige clair au survol */
+  color: #fff;
+  border-radius: 4px;
+}
+
+/* Style de la zone principale */
+main {
+  padding: 10px;
+}
+
+/* Diaporama */
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mySlides img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent noir */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.dot-container {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #e2c2a1; /* Beige moyen */
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active {
+  background-color: #c49e8f; /* Beige foncé */
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  color: #c49e8f; /* Beige foncé */
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #d8b7a6; /* Beige clair */
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #c49e8f; /* Beige foncé pour le hover */
+}
+
+/* Footer */
+footer {
+  background-color: rgb(192, 135, 106); /* Beige clair similaire à la navbar */
+  color: white; /* Texte en blanc */
+  padding: 20px 0; /* Un peu d'espace autour du texte */
+  text-align: center; /* Centrer le texte dans le footer */
+}
+
+/* Liens dans le footer */
+footer a {
+  color: white; /* Liens en blanc */
+  text-decoration: none; /* Enlever le soulignement */
+  transition: color 0.3s ease;
+}
+
+/* Changement de couleur des liens au survol dans le footer */
+footer a:hover {
+  color: #c49e8f; /* Beige foncé au survol */
+}
+
+/* Positionner le sous-menu sous le lien Recherche */
+.nav-item.dropdown {
+  position: relative;
+}
+
+/* Masquer le sous-menu par défaut */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Afficher le sous-menu au survol de la souris */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Style du lien survolé */
+.dropdown-item {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #e2c2a1; /* Beige moyen au survol */
+}
+
+/* Styles Responsives */
+@media (max-width: 600px) {
+  .contenu {
+    flex-direction: column;
+  }
+
+  nav, article {
+    flex: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Pagination */
+.pagination .page-item.active .page-link {
+  background-color:#c49e8f;
+  
+  color: white;
+}
+
+.pagination .page-link {
+ 
+  border-radius: 50%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-link:hover {
+  background-color: #c49e8f;;
+  color: #fff;
+}
+
+.pagination .active .page-link {
+  background-color: #c49e8f;
+  color: #fff;
+  
+}
+
+/* Autres éléments de formulaire, tableau, etc. */
+
+.formulaire {
+  background: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  
+}
+
+.btn-submit {
+  display: inline-block;
+  margin-top: 10px;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #c49e8f;;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #5a2aff;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+  color: #5a2aff;
+}
+
+table tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.small-hover-image {
+  width: 1000px;
+  height: 200px;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 8px;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.hover-image-trigger:hover .small-hover-image {
+  display: block;
+}
+
+.hover-image {
+  width: 600px;
+  height: auto;
+  max-width: none;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  z-index: 50;
+}
+
+.hover-image-trigger:hover .hover-image {
+  display: block;
+}
+
+h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: #ad8170; /* Couleur chaude, douce mais visible */
+  margin: 20px 0;
+  text-transform: capitalize; /* Remplacer les majuscules complètes par une capitalisation pour plus de douceur */
+  letter-spacing: 0.5px; /* Un léger espacement entre les lettres */
+  font-family: 'Georgia', serif; /* Une police plus élégante pour un effet plus raffiné */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Ombre légère pour donner du relief */
+}
+
+p {
+  max-width: 800px;
+  margin: 10px auto;
+  text-align: justify;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+a {
+  color:  #caa090;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+a:hover {
+  color: #caa090;
+  border-bottom: 2px solid #caa090;
+}
+
+p a { 
+  font-style: italic;
+}
+/* Style général */
+.container {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Restaurants */
+.restaurant-container {
+  background-color: #FDEFEF; /* Rose poudré */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.restaurant-container h3 {
+  color: #B97A7A; /* Brun rosé */
+}
+
+/* Hôtels */
+.hotel-container {
+  background-color: #FAF0E6; /* Beige clair */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hotel-container h3 {
+  color: #A67B5B; /* Marron doux */
+}
+
+/* Jardins */
+.jardin-container {
+  background-color: #F5F5DC; /* Ivoire léger */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.jardin-container h3 {
+  color: #8C7551; /* Brun naturel */
+}
+
+/* Musées */
+.musee-container {
+  background-color: #EADBC8; /* Nude sable */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.musee-container h3 {
+  color: #826A5C; /* Taupe */
+}
+
+/* Style des boutons */
+button, .btn-primary {
+  background-color: #D4B5A6; /* Nude terreux */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+button:hover, .btn-primary:hover {
+  background-color: #B89482; /* Marron rosé plus foncé */
+}
+
+/* Amélioration des liens */
+a {
+  color: #A67B5B; /* Marron nude */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

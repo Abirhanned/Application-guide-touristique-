@@ -1,0 +1,109 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Memory - Jeu de Mémoire{% endblock %}
+
+{% block content %}
+<style>
+  /* Conteneur du jeu */
+  .memory-page {
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    width: 100% !important;
+    text-align: center;
+  }
+
+  /* Instructions */
+  .memory-page #instruction {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  /* Grille du jeu */
+  .memory-page #game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 600px;
+  }
+
+  /* Styles des cartes */
+  .memory-page .card {
+    width: 100px;
+    height: 150px;
+    perspective: 1000px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .memory-page .card .card-front,
+  .memory-page .card .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+  }
+
+  .memory-page .card .card-front {
+    background-color: #ddd;
+    transform: rotateY(0deg);
+  }
+
+  .memory-page .card .card-back {
+    background-size: cover;
+    background-position: center;
+    transform: rotateY(180deg);
+  }
+
+  .memory-page .card.flipped .card-front {
+    transform: rotateY(180deg);
+  }
+
+  .memory-page .card.flipped .card-back {
+    transform: rotateY(360deg);
+  }
+
+  /* Styles pour le message de fin */
+  #end-message {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  #result-message {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  #replay-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color:  #c49e8f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #replay-button:hover {
+    background-color:  #c49e8f;
+  }
+</style>
+
+<div class="memory-page">
+  <p id="instruction">Les cartes sont révélées pendant 5 secondes. Observez bien !</p>
+  <div id="game-grid"></div>
+  <div id="end-message" style="display: none;">
+    <h2 id="result-message"></h2>
+    <button id="replay-button">Rejouer</button>
+  </div>
+</div>
+
+<script src="js/memoire.js"></script>
+{% endblock %}

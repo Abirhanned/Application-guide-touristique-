@@ -1,0 +1,442 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Détails - {{ place.nom }}{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<style>
+/* Style général */
+.container {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Style pour le titre du restaurant */
+.jumbotron-restaurant-title {
+    background-color: #EAD9D2; /* Nude clair */
+    color: #5E3C2A; /* Marron doux */
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les autres sections */
+.jumbotron-restaurant {
+    background-color: #FDEFEF; /* Rose poudré */
+    color: #6D4C41; /* Brun doux */
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron-restaurant h3, .jumbotron-restaurant h4 {
+    color: #5E3C2A; /* Marron doux */
+    font-weight: bold;
+}
+
+/* Style du bouton */
+.btn-nude {
+    background-color: #D4B5A6; /* Nude terreux */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.btn-nude:hover {
+    background-color: #B89482; /* Marron rosé plus foncé */
+}
+
+/* Style pour le titre de l'hôtel */
+.jumbotron-hotel-title {
+    background-color: #EAD9D2; /* Nude clair */
+    color: #5E3C2A; /* Marron doux */
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les sections générales */
+.jumbotron-hotel {
+    background-color: #FDEFEF; /* Rose poudré */
+    color: #6D4C41; /* Brun doux */
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron-hotel h3, .jumbotron-hotel h4 {
+    color: #5E3C2A; /* Marron doux */
+    font-weight: bold;
+}
+
+/* Style du bouton */
+.btn-nude {
+    background-color: #D4B5A6; /* Nude terreux */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.btn-nude:hover {
+    background-color: #B89482; /* Marron rosé plus foncé */
+}
+
+
+/* Style pour le titre du jardin */
+.jumbotron-jardin-title {
+    background-color: #E3DAC9; /* Beige clair */
+    color: #5B4636; /* Marron doux */
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les sections */
+.jumbotron-jardin {
+    background-color: #F7EFE5; /* Nude légèrement rosé */
+    color: #6D4C41; /* Marron doux */
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron-jardin h3, .jumbotron-jardin h4 {
+    color: #5B4636; /* Marron foncé */
+    font-weight: bold;
+}
+
+/* Style du bouton */
+.btn-nude {
+    background-color: #C9A78B; /* Nude terreux */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.btn-nude:hover {
+    background-color: #A17C63; /* Marron rosé plus foncé */
+}
+
+
+/* Musées */
+.jumbotron-musee, .jumbotron-musee p, .jumbotron-musee h1 {
+    background-color: #EADBC8; /* Nude sable */
+    color: #5E3C2A; /* Chocolat doux */
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style des boutons */
+button, .btn-primary {
+    background-color: #D4B5A6; /* Nude terreux */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+button:hover, .btn-primary:hover {
+    background-color: #B89482; /* Marron rosé plus foncé */
+}
+
+/* Amélioration des liens */
+a {
+    color: #A67B5B; /* Marron nude */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+</style>
+     
+    {% if type == 'restaurants' %}
+    <div class="container mt-4">
+
+        <!-- Nom du restaurant en premier -->
+        <div class="jumbotron-restaurant-title">
+            <h1 class="display-4">{{ place.nom | upper }}</h1>
+        </div>
+
+        <!-- Informations sur le restaurant -->
+        <div class="jumbotron-restaurant">
+            <h3>🍽️ Informations sur le restaurant</h3>
+            
+            <ul>
+                <li><b>Type :</b> {{ place.type }}</li>
+                <li><b>Marque :</b> {{ place.marque|default('Non spécifiée') }}</li>
+                <li><b>Cuisine :</b> {{ place.cuisine|default('Non spécifiée') }}</li>
+                <li><b>Végétarien :</b> {{ place.vegetarien ? 'Oui' : 'Non' }}</li>
+                <li><b>Végan :</b> {{ place.vegane ? 'Oui' : 'Non' }}</li>
+                <li><b>Heures d'ouverture :</b> {{ place.heures_ouverture|default('Non spécifiées') }}</li>
+                <li><b>Accès handicapés :</b> {{ place.acces_handicapes ? 'Oui' : 'Non' }}</li>
+                <li><b>Téléphone :</b> {{ place.telephone|default('Non spécifié') }}</li>
+                <li><b>Site web :</b> 
+                    {% if place.site_web %}
+                        <a href="{{ place.site_web }}" target="_blank">{{ place.site_web }}</a>
+                    {% else %}
+                        Non spécifié
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+
+        <!-- Localisation -->
+        <div class="jumbotron-restaurant">
+            <h4>📍 Localisation</h4>
+            <ul>
+                <li><b>Ville :</b> {{ place.ville }}</li>
+                <li><b>Code ville :</b> {{ place.code_ville }}</li>
+                <li><b>Département :</b> {{ place.departement }} (Code : {{ place.code_departement }})</li>
+                <li><b>Région :</b> {{ place.region }} (Code : {{ place.code_region }})</li>
+            </ul>
+            <button class="btn-nude" onclick="window.open('https://www.google.com/maps?q={{ place.lat }},{{ place.lon }}', '_blank')">
+                📍 S'y rendre
+            </button>
+        </div>
+
+    {% elseif type == 'hotels' %}
+   
+    <div class="container mt-4">
+
+        <!-- Nom de l'hôtel en premier -->
+        <div class="jumbotron-hotel-title">
+            <h1 class="display-4">{{ place.nom | upper }}</h1>
+        </div>
+
+        <!-- Informations générales sur l'hôtel -->
+        <div class="jumbotron-hotel">
+            <h3>🏨 Informations sur l'hôtel</h3>
+            
+            <ul>
+                <li><b>Type :</b> {{ place.type }}</li>
+                <li><b>Nombre d'étoiles :</b> {{ place.nb_etoiles }}</li>
+                <li><b>Nombre de chambres :</b> {{ place.nb_chambres }}</li>
+                <li><b>Accès handicapés :</b> {{ place.acces_handicapes ? 'Oui' : 'Non' }}</li>
+                <li><b>Accès à Internet :</b> {{ place.acces_internet ? 'Oui' : 'Non' }}</li>
+            </ul>
+        </div>
+
+        <!-- Contact et services -->
+        <div class="jumbotron-hotel">
+            <h4>📞 Contact & Services</h4>
+            <ul>
+                <li><b>Téléphone :</b> {{ place.telephone|default('Non spécifié') }}</li>
+                <li><b>Email :</b> {{ place.email|default('Non spécifié') }}</li>
+                <li><b>Site web :</b> 
+                    {% if place.site_web %}
+                        <a href="{{ place.site_web }}" target="_blank">{{ place.site_web }}</a>
+                    {% else %}
+                        Non spécifié
+                    {% endif %}
+                </li>
+                <li><b>Page Facebook :</b> 
+                    {% if place.page_facebook %}
+                        <a href="{{ place.page_facebook }}" target="_blank">{{ place.page_facebook }}</a>
+                    {% else %}
+                        Non spécifiée
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+
+        <!-- Localisation -->
+        <div class="jumbotron-hotel">
+            <h4>📍 Localisation</h4>
+            <ul>
+                <li><b>Ville :</b> {{ place.ville }}</li>
+                <li><b>Code postal :</b> {{ place.code_postal }}</li>
+                <li><b>Département :</b> {{ place.departement }} (Code : {{ place.code_departement }})</li>
+                <li><b>Région :</b> {{ place.region }} (Code : {{ place.code_region }})</li>
+            </ul>
+
+            <button class="btn-nude" onclick="window.open('https://www.google.com/maps?q={{ place.lat }},{{ place.lon }}', '_blank')">
+                📍 S'y rendre
+            </button>
+        </div>
+
+    </div>
+
+
+    {% elseif type == 'jardins' %}
+    <div class="container mt-4">
+
+        <!-- Nom du jardin en premier -->
+        <div class="jumbotron-jardin-title">
+            <h1 class="display-4">{{ place.nom | upper }}</h1>
+        </div>
+
+        <!-- Informations générales -->
+        <div class="jumbotron-jardin">
+            <h3>🌿 Informations sur le jardin</h3>
+            <ul>
+                <li><b>Type :</b> {{ place.type }}</li>
+                <li><b>Description :</b> {{ place.description }}</li>
+                <li><b>Accessible au public :</b> {{ place.accessible_au_public ? 'Oui' : 'Non' }}</li>
+            </ul>
+        </div>
+
+        <!-- Localisation -->
+        <div class="jumbotron-jardin">
+            <h4>📍 Localisation</h4>
+            <ul>
+                <li><b>Adresse :</b> {{ place.adresse }}</li>
+                <li><b>Ville :</b> {{ place.ville }}</li>
+                <li><b>Code postal :</b> {{ place.code_postal }}</li>
+                <li><b>Département :</b> {{ place.departement }} (Code : {{ place.code_departement }})</li>
+                <li><b>Région :</b> {{ place.region }} (Code : {{ place.code_region }})</li>
+            </ul>
+            
+            <button class="btn-nude" onclick="window.open('https://www.google.com/maps?q={{ place.lat }},{{ place.lon }}', '_blank')">
+                📍 S'y rendre
+            </button>
+        </div>
+
+        <!-- Contact et site web -->
+        <div class="jumbotron-jardin">
+            <h4>🌐 Informations complémentaires</h4>
+            <ul>
+                <li><b>Site web :</b> 
+                    {% if place.site_web %}
+                        <a href="{{ place.site_web }}" target="_blank">{{ place.site_web }}</a>
+                    {% else %}
+                        Non spécifié
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    {% elseif type == 'musees' %}
+
+
+
+
+
+
+    <style>
+        /* Jumbotron avec fond gris clair et texte noir, bords arrondis */
+        .jumbotron-light, .jumbotron-light h1 {
+            background-color: #f1f1f1; /* Gris clair */
+            color: #000; /* Texte noir */
+            border-radius: 15px; /* Bords arrondis */
+            padding: 30px; /* Un peu d'espace interne */
+            margin-bottom: 20px; /* Espace entre les jumbotrons */
+        }
+
+        /* Jumbotron avec fond noir et texte blanc, bords arrondis */
+        .jumbotron-dark, .jumbotron-dark p, .jumbotron-dark h1{
+            background-color: #d8b7a6; 
+            color: #000; /* Texte blanc */
+            border-radius: 15px; /* Bords arrondis */
+            padding: 30px; /* Un peu d'espace interne */
+            margin-bottom: 20px; /* Espace entre les jumbotrons */
+        }
+
+        /* Optionnel: ajouter une légère ombre au fond pour le côté moderne */
+        .jumbotron-light, .jumbotron-dark {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5">
+
+    <!-- Jumbotron pour le nom du musée -->
+         
+
+    <!-- Jumbotron pour l'histoire, atouts et autres informations -->
+    <div class="jumbotron-dark">
+        <h1 class="display-4">{{ place.nom | upper }}</h1>
+        
+        {% if place.annee_creation != 0 %}
+        <p><strong>Année de création : </strong>{{ place.annee_creation }}</p>
+        {% endif %}
+        
+        <div class="jumbotron-dark"><p><strong>Histoire : </strong>{{ place.histoire }}</p></div>
+        <div class="jumbotron-dark"><p><strong>Atouts : </strong>{{ place.atout }}</p></div>
+        <div class="jumbotron-dark"><p><strong>Artiste(s) : </strong>{{ place.artiste }}</p></div>
+        <div class="jumbotron-dark"><p><strong>Intérêts : </strong>{{ place.interet }}</p></div>
+        <div class="jumbotron-dark"><p><strong>Thèmes : </strong>{{ place.themes }}</p></div>
+    </div>
+
+        <!-- Jumbotron pour l'adresse -->
+    <div class="jumbotron-light">
+        <h2>Adresse</h2>
+        <p><strong>{{ place.adresse }}</strong></p>
+        <p><strong>{{ place.code_postal }} {{ place.ville }}</strong></p>     
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="https://www.google.com/maps?q={{ place.lat }},{{ place.lon }}" role="button">S'y rendre</a>
+        </p>
+    </div>
+
+    <!-- Jumbotron pour les informations de contact -->
+    <div class="jumbotron-light">
+        <h2>Informations de contact</h2>
+        <p><strong>Site web : </strong><a href="{{ place.site_web }}" target="_blank">{{ place.site_web }}</a></p>
+        <p><strong>Téléphone : </strong>{{ place.telephone }}</p>
+    </div>
+
+
+</div>
+
+    {% else %}
+        <p>Aucune information détaillée disponible pour ce type de lieu.</p>
+    {% endif %}
+
+<a href="#" onclick="goBack()" class="btn btn-secondary mt-3">Retour</a>
+
+<script>
+    function goBack() {
+        const previousURL = localStorage.getItem('previousURL');
+        if (previousURL) {
+            window.location.href = previousURL;
+        } else {
+            window.history.back(); // Si l'URL précédente n'est pas stockée, revenir en arrière dans l'historique
+        }
+    }
+</script>
+</div>
+{% endblock %}

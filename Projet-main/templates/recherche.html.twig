@@ -1,0 +1,113 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Recherche de lieux{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Colonne gauche : Recherche -->
+        <div class="col-md-5">
+            <h1>Recherche</h1>
+
+            <!-- Formulaire de recherche -->
+            <form id="search-form" method="GET" class="mb-4">
+                <div class="form-group">
+                    <label for="search-input-name">Nom</label>
+                    <input type="text" name="name" id="search-input-name" class="form-control" placeholder="Rechercher un lieu par nom..." value="{{ name }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="search-input-city">Ville</label>
+                    <input type="text" name="city" id="search-input-city" class="form-control" placeholder="Rechercher une ville..." value="{{ city }}">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="search-input-type">Catégorie</label>
+                    <select name="type" id="search-input-type" class="form-control">
+                        <option value="" {% if type is empty %}selected{% endif %}>Toutes les catégories</option>
+                        <option value="hotels" {% if type == 'hotels' %}selected{% endif %}>Hôtels</option>
+                        <option value="musees" {% if type == 'musees' %}selected{% endif %}>Musées</option>
+                        <option value="restaurants" {% if type == 'restaurants' %}selected{% endif %}>Restaurants</option>
+                        <option value="jardins" {% if type == 'jardins' %}selected{% endif %}>Jardins</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary mt-3 w-100" type="submit">Chercher</button>
+            </form>
+        </div>
+
+        <!-- Colonne droite : Carte -->
+        <div class="col-md-7">
+            <h1>Carte des lieux</h1>
+            <div id="map" style="height: 500px; border: 1px solid #ddd;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Intégration de Leaflet.js -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+ <script>
+    // Initialisation de la carte centrée sur la France
+    var map = L.map('map').setView([46.603354, 1.888334], 6); // Coordonnées de la France avec un zoom adapté
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Définir des icônes personnalisées pour chaque type
+    var icons = {
+        hotels: L.icon({
+            iconUrl: 'icons/hotel.png', // Chemin vers l'icône de l'hôtel
+            iconSize: [32, 32],        // Taille de l'icône
+            iconAnchor: [16, 32],      // Point d'ancrage (base de l'icône)
+            popupAnchor: [0, -32]      // Point d'ancrage pour la popup
+        }),
+        musees: L.icon({
+            iconUrl: 'icons/musee.png', // Chemin vers l'icône du musée
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        }),
+        jardins: L.icon({
+            iconUrl: 'icons/jardin.png', // Chemin vers l'icône du jardin
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        }),
+        restaurants: L.icon({
+            iconUrl: 'icons/restaurant.png', // Chemin vers l'icône du restaurant
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        }),
+        default: L.icon({
+            iconUrl: 'icons/default.png', // Icône par défaut
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        })
+    };
+
+    {% if places is not empty %}
+        // Ajouter les marqueurs pour chaque lieu trouvé uniquement après une recherche
+        {% for place in places %}
+            L.marker([{{ place.lat }}, {{ place.lon }}], {
+                icon: icons["{{ place.type }}"] || icons.default // Utiliser l'icône correspondante ou l'icône par défaut
+            })
+            .addTo(map)
+            .bindPopup(`
+                <b><a href="details.php?type={{ place.type }}&id={{ place.id }}">{{ place.name }}</a></b>
+                <br>
+                <button class="btn btn-primary mt-3 w-100" onclick="window.open('https://www.google.com/maps?q={{ place.lat }},{{ place.lon }}', '_blank')">S'y rendre</button>
+            `);
+        {% endfor %}
+
+        // Ajuster la vue de la carte pour inclure tous les marqueurs
+        var bounds = [
+            {% for place in places %}
+                [{{ place.lat }}, {{ place.lon }}],
+            {% endfor %}
+        ];
+        map.fitBounds(bounds);
+    {% endif %}
+</script>
+
+{% endblock %}

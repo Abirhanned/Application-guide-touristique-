@@ -1,0 +1,68 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Programme des Villes de France{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        
+
+        <div class="space-y-8">
+            <!-- Paris Section -->
+            <div class="relative bg-white rounded-lg shadow-md overflow-hidden" id="paris">
+                <a href="paris.php">
+                    <img alt="Paris" class="w-full h-64 object-cover" src="images/paris.jpeg"/>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <h2 class="text-3xl font-bold text-white">Paris</h2>
+                    </div>
+                </a>
+            </div>
+
+
+                        <!-- Marseille Section -->
+            <div class="relative bg-white rounded-lg shadow-md overflow-hidden" id="marseille">
+                <a href="marseille.php">
+                    <img alt="Marseille" class="w-full h-64 object-cover" src="images/marseille.jpg"/>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <h2 class="text-3xl font-bold text-white">Marseille</h2>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Lyon Section -->
+            <div class="relative bg-white rounded-lg shadow-md overflow-hidden" id="lyon">
+                <a href="lyon.php">
+                    <img alt="Lyon" class="w-full h-64 object-cover" src="images/lyon_2.jpg"/>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <h2 class="text-3xl font-bold text-white">Lyon</h2>
+                    </div>
+                </a>
+            </div>
+
+                        <!-- Nancy Section -->
+            <div class="relative bg-white rounded-lg shadow-md overflow-hidden" id="nancy">
+                <a href="nancy.php">
+                    <img alt="Nancy" class="w-full h-64 object-cover" src="images/nancy.jpg"/>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <h2 class="text-3xl font-bold text-white">Nancy</h2>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Lille Section -->
+            <div class="relative bg-white rounded-lg shadow-md overflow-hidden" id="lille">
+                <a href="lille.php">
+                    <img alt="Lille" class="w-full h-64 object-cover" src="images/lille_2.jpg"/>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <h2 class="text-3xl font-bold text-white">Lille</h2>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+        
+    </div>
+    <div class="text-center mb-4">
+            <p class="text-xl">Pas de programme pour l'instant pour les autres villes <span class="text-2xl">🥰</span></p>
+        </div>
+{% endblock %}

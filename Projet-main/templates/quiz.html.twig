@@ -1,0 +1,80 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Quiz - Culture Générale{% endblock %}
+
+{% block content %}
+<style>
+  /* Conteneur spécifique pour le quiz */
+  .quiz-page {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    width: 100% !important;
+    text-align: center;
+  }
+
+  /* Styles pour le timer */
+  .quiz-page .quiz-timer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  /* Styles pour le conteneur de la question */
+  .quiz-page .question-container {
+    margin: 20px auto;
+    padding: 30px;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Styles pour la question */
+  .quiz-page .quiz-question {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #444;
+  }
+
+  /* Styles pour les boutons de réponse */
+  .quiz-page .quiz-answers button {
+    display: block;
+    margin: 10px auto;
+    padding: 15px;
+    width: 80%;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #c49e8f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .quiz-page .quiz-answers button:hover {
+    background-color: #c49e8f;
+    transform: scale(1.05);
+  }
+
+  /* Styles pour le numéro de la question */
+  .quiz-page .quiz-question-number {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+  }
+</style>
+
+<div class="quiz-page">
+  <div id="timer" class="quiz-timer">Temps restant : 60</div>
+  <div class="quiz-question-number" id="question-number">Question 1 / 10</div>
+  <div class="question-container">
+    <div id="question" class="quiz-question"></div>
+    <div id="answers" class="quiz-answers"></div>
+  </div>
+</div>
+
+<script src="js/quiz.js"></script>
+{% endblock %}

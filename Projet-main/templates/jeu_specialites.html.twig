@@ -1,0 +1,139 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Jeux - Spécilités culinaires{% endblock %}
+
+{% block content %}
+
+<style>
+
+    /* Fixe la navbar en haut avec fixed */
+    nav.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    /* Ajouter un padding-top pour compenser la hauteur de la navbar */
+    .content {
+        padding-top: 70px; /* Ajuste cette valeur en fonction de la hauteur de ta navbar */
+    }
+
+    /* Réinitialisation des marges et paddings par défaut */
+    body, html {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.regions, .specialties {
+    display: flex;
+    flex-direction: column;
+}
+
+.region, .specialty {
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    width: 200px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.region {
+    background-color:rgb(126, 69, 45);
+    color : #fff;
+}
+
+.specialty {
+    background-color:rgb(180, 139, 112);
+    color:rgb(105, 59, 39);
+}
+
+.specialty.dragging {
+    opacity: 0.5;
+}
+
+</style>
+
+
+
+
+<h1>Associe la spécialité culinaire à sa région</h1>
+
+        <div id="timer">Temps restant : <span id="time"></span></div>
+        <h1 id="result"></h1>
+
+    <div class="game-container">
+        <div class="regions">
+            <div id="bordeaux" class="region" ondrop="drop(event)" ondragover="allowDrop(event)">Bordeaux</div>        
+            <div id="franche_comte" class="region" ondrop="drop(event)" ondragover="allowDrop(event)">Franche-Comté</div>
+            <div id="provence" class="region" ondrop="drop(event)" ondragover="allowDrop(event)">Provence</div>
+            
+        </div>
+
+    <div class="specialties">
+        <div id="canele" class="specialty" draggable="true" ondragstart="drag(event)">
+            Les canelés
+            <img src="images/jeu_specialites/canele.jpg" alt="Canelé" class="specialty-img">
+        </div>
+        <div id="camembert" class="specialty" draggable="true" ondragstart="drag(event)">
+            Le camembert
+            <img src="images/jeu_specialites/camembert.jpg" alt="Camembert" class="specialty-img">
+        </div>
+        <div id="ratatouille" class="specialty" draggable="true" ondragstart="drag(event)">
+            La ratatouille
+            <img src="images/jeu_specialites/ratatouille.jpg" alt="Ratatouille" class="specialty-img">
+        </div>
+        <div id="choucroute" class="specialty" draggable="true" ondragstart="drag(event)">
+            La choucroute
+            <img src="images/jeu_specialites/choucroute.jpg" alt="Choucroute" class="specialty-img">
+        </div>
+    </div>
+
+    <div class="regions">
+        <div id="alsace" class="region" ondrop="drop(event)" ondragover="allowDrop(event)">Alsace</div>
+        <div id="bourgogne" class="region" ondrop="drop(event)" ondragover="allowDrop(event)">Bourgogne</div>        
+        <div id="aquitaine" class="region" ondrop="drop(event)" ondragover="allowDrop(event)">Aquitaine</div>
+        <div id="normandie" class="region" ondrop="drop(event)" ondragover="allowDrop(event)">Normandie</div>
+    </div>
+
+    <div class="specialties">
+        <div id="escargots" class="specialty" draggable="true" ondragstart="drag(event)">
+            Les escargots
+            <img src="images/jeu_specialites/escargots.jpg" alt="Escargots" class="specialty-img">
+        </div>
+        <div id="cancoillote" class="specialty" draggable="true" ondragstart="drag(event)">
+            La cancoillote
+            <img src="images/jeu_specialites/cancoillote.webp" alt="Cancoillote" class="specialty-img">
+        </div>
+        <div id="pimentDEspelette" class="specialty" draggable="true" ondragstart="drag(event)">
+            Le piment d'Espelette
+            <img src="images/jeu_specialites/piment_espelette.webp" alt="Piment d'Espelette" class="specialty-img">
+        </div>
+    </div>
+</div>
+
+
+    <script src="js/jeu_specialites.js?v=2"></script>
+
+
+
+{% endblock %}

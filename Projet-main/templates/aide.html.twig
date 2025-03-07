@@ -1,0 +1,178 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Aide - FAQ{% endblock %}
+{% set usefulLinks = [
+    {
+        "text": "Météo France",
+        "link": "https://meteofrance.com",
+        "icon": "fas fa-cloud-sun",
+        "description": "Consultez la météo en temps réel pour planifier vos visites."
+    },
+    {
+        "text": "Horaires des transports",
+        "link": "https://www.thetrainline.com/fr/horaire-bus",
+        "icon": "fas fa-bus",
+        "description": "Trouvez les horaires des bus, métros et tramways."
+    },
+    {
+        "text": "Convertisseur de devises",
+        "link": "https://www.boursorama.com/bourse/devises/convertisseur-devises/",
+        "icon": "fas fa-euro-sign",
+        "description": "Convertissez les devises pour vos dépenses à l'étranger."
+    },
+] 
+%}
+
+{% block content %}
+
+<div class="container mx-auto p-4">
+    <!-- Titre de la page -->
+    <h1 class="text-4xl font-extrabold text-center" style="color: #c49e8f;">{{ pageTitle }}</h1>
+    <p class="text-lg text-center mb-8 text-gray-600">{{ pageDescription }}</p>
+
+    <!-- Section FAQ -->
+    <div class="bg-gradient-to-r from-gray-100 to-gray-300 rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-2xl font-bold mb-4 flex items-center" style="color: #c49e8f;">
+            <i class="fas fa-question-circle mr-2" style="color: #c49e8f;"></i> Questions fréquentes (FAQ)
+        </h2>
+
+        <!-- Liste des questions avec réponses interactives -->
+        <div x-data="{ open: null }" class="space-y-4">
+            <!-- Question 1 -->
+            <div class="bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                <button @click="open === 1 ? open = null : open = 1" class="w-full text-left">
+                    <h3 class="text-xl font-semibold text-gray-800">Comment rechercher une ville ou un programme de visite ?</h3>
+                </button>
+                <div x-show="open === 1" x-collapse class="mt-2">
+                    <p class="text-lg text-gray-600">
+                        Pour rechercher une ville ou un programme de visite, utilisez la barre "Recherche" en haut de la page. Tapez le nom de la ville ou le type de visite que vous souhaitez, puis sélectionnez une option dans les résultats.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                <button @click="open === 2 ? open = null : open = 2" class="w-full text-left">
+                    <h3 class="text-xl font-semibold text-gray-800">Comment utiliser la carte interactive ?</h3>
+                </button>
+                <div x-show="open === 2" x-collapse class="mt-2">
+                    <p class="text-lg text-gray-600">
+                        La carte interactive vous permet de visualiser les lieux d'intérêt. Cliquez sur un marqueur pour voir les détails du lieu. Vous pouvez également zoomer et déplacer la carte pour explorer différentes zones.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                <button @click="open === 3 ? open = null : open = 3" class="w-full text-left">
+                    <h3 class="text-xl font-semibold text-gray-800">Que faire si l’application ne fonctionne pas correctement ?</h3>
+                </button>
+                <div x-show="open === 3" x-collapse class="mt-2">
+                    <p class="text-lg text-gray-600">
+                        Si l'application ne fonctionne pas correctement, essayez de la redémarrer ou de mettre à jour la page. Si le problème persiste, contactez notre support technique à les adresses dans la section "Contactez-nous".
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                <button @click="open === 4 ? open = null : open = 4" class="w-full text-left">
+                    <h3 class="text-xl font-semibold text-gray-800">Comment signaler un bug ou un problème technique ?</h3>
+                </button>
+                <div x-show="open === 4" x-collapse class="mt-2">
+                    <p class="text-lg text-gray-600">
+                        Pour signaler un bug ou un problème technique, rendez-vous dans la section "Contactez-nous" et envoyez un email.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                <button @click="open === 5 ? open = null : open = 5" class="w-full text-left">
+                    <h3 class="text-xl font-semibold text-gray-800">Où puis-je signaler des erreurs ou proposer des idées pour améliorer l’application ?</h3>
+                </button>
+                <div x-show="open === 5" x-collapse class="mt-2">
+                    <p class="text-lg text-gray-600">
+                        Vous pouvez signaler des erreurs ou proposer des idées en envoyant un mail dans la section "Contactez-nous". Nous apprécions vos retours pour améliorer l'application !
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            
+        </div>
+    </div>
+
+    <!-- Section Contact et support -->
+    <div class="bg-gradient-to-r from-gray-100 to-gray-300 rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-2xl font-bold mb-4 flex items-center" style="color: #c49e8f;">
+            <i class="fas fa-envelope mr-2" style="color: #c49e8f;"></i> Contactez-nous
+        </h2>
+        <div class="space-y-4">
+            <p class="text-lg text-gray-600">Pour toute question ou problème, vous pouvez nous contacter aux adresses suivantes :</p>
+            <ul class="text-gray-600 space-y-2">
+                <li class="flex items-center justify-between bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                    <span>ashley.padayodi@etu.univ-lyon1.fr</span>
+                    <a href="mailto:ashley.padayodi@etu.univ-lyon1.fr">
+                        <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300" style="background-color: #c49e8f;">
+                            Contacter
+                        </button>
+                    </a>
+                </li>
+                <li class="flex items-center justify-between bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                    <span>abir.hanned@etu.univ-lyon1.fr</span>
+                    <a href="mailto:abir.hanned@etu.univ-lyon1.fr">
+                        <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300" style="background-color: #c49e8f;">
+                            Contacter
+                        </button>
+                    </a>
+                </li>
+                <li class="flex items-center justify-between bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                    <span>nawal.elkhal@etu.univ-lyon1.fr</span>
+                    <a href="mailto:nawal.elkhal@etu.univ-lyon1.fr">
+                        <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300" style="background-color: #c49e8f;">
+                            Contacter
+                        </button>
+                    </a>
+                </li>
+                <li class="flex items-center justify-between bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                    <span>chafae.qallouj@etu.univ-lyon1.fr</span>
+                    <a href="mailto:chafae.qallouj@etu.univ-lyon1.fr">
+                        <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300" style="background-color: #c49e8f;">
+                            Contacter
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section Informations utiles -->
+    <div class="bg-gradient-to-r from-gray-100 to-gray-300 rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-2xl font-bold mb-4 flex items-center" style="color: #c49e8f;">
+            <i class="fas fa-info-circle mr-2" style="color: #c49e8f;"></i> Informations utiles
+        </h2>
+        <div class="space-y-4">
+            {% for link in usefulLinks %}
+                <a href="{{ link.link }}" target="_blank" class="block bg-white p-4 rounded-lg hover:shadow-lg transition duration-300">
+                    <div class="flex items-center">
+                        <!-- Icône (optionnelle) -->
+                        <i class="{{ link.icon }} text-2xl mr-4" style="color: #c49e8f;"></i>
+                        <div>
+                            <!-- Titre du lien -->
+                            <h3 class="text-xl font-semibold text-gray-800">{{ link.text }}</h3>
+                            <!-- Description du lien (optionnelle) -->
+                            {% if link.description %}
+                                <p class="text-lg text-gray-600">{{ link.description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+</div>
+
+{% endblock %}

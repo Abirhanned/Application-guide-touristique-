@@ -1,0 +1,129 @@
+{% extends 'donnerAvis.html.twig' %}
+
+{% block title %}Donnez votre avis{% endblock %}
+
+{% block content1 %}
+<style>
+.rating {
+  display: flex;
+  flex-direction: row-reverse; /* Affiche les étoiles de droite à gauche */
+  justify-content: left; /* Aligne les étoiles à gauche */
+  gap: 5px; /* Espacement entre les étoiles */
+}
+
+.rating input {
+  position: absolute;
+  opacity: 0; /* Rend les inputs invisibles mais interactifs */
+}
+
+.rating label {
+  font-size: 30px;
+  color: #bbb; /* Couleur des étoiles non sélectionnées */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+/* Colore toutes les étoiles sélectionnées et précédentes */
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #f39c12; /* Couleur dorée */
+}
+
+.btn-submit {
+  display: inline-block;
+  margin-top: 10px;
+  color: white;
+  padding: 10px 15px;
+  border: 1px solid #c49e8f;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color:  #c49e8f; /* Blanc */
+  color: white; /* Change aussi la couleur du texte pour une meilleure visibilité */
+}
+
+</style>
+<article>
+    <div class="content">
+        <div class="formulaire">
+            <h1>Envoyer un avis</h1>
+
+            {% if success is not empty %}
+            
+                <div class="alert success">{{ success }}</div>
+            {% elseif errors is not empty %}
+                <div class="alert error">
+                    <ul>
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <form method="POST" action="donnerAvis{{pageAvis}}.php">
+
+                <div class="form-group">
+                    <label for="observation_stage">Nom d'utilisateur :</label>
+                    <input type="text" id="pseudo" name="pseudo">
+                </div>
+                <div class="form-group">
+                    <label >Nom {{type}} </label>
+                    <input list="hotels" name="nom" id="nom" autocomplete="off" value="{{ selectionne }}" placeholder="Sélectionner un {{type2}}" required>
+                    <datalist id="hotels">
+                          {% for row in result %}
+                         <option value="{{ row.nom }}">
+                         {{ row.nom }}
+                        </option>
+                        {% else %}
+                          <option value="">Aucun hôtel trouvé</option>
+                        {% endfor %}
+                     </datalist>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="fin_stage">Date de visite :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+
+                <div class="form-group">
+    <label for="rating">Note :</label>
+    <div class="rating">
+        <input type="radio" id="note5" name="note" value="5">
+        <label for="note5" title="5 étoiles">&#9733;</label>
+        
+        <input type="radio" id="note4" name="note" value="4">
+        <label for="note4" title="4 étoiles">&#9733;</label>
+        
+        <input type="radio" id="note3" name="note" value="3">
+        <label for="note3" title="3 étoiles">&#9733;</label>
+        
+        <input type="radio" id="note2" name="note" value="2">
+        <label for="note2" title="2 étoiles">&#9733;</label>
+        
+        <input type="radio" id="note1" name="note" value="1">
+        <label for="note1" title="1 étoile">&#9733;</label>
+    </div>
+
+    </div>
+ 
+
+                <div class="form-group">
+                    <label for="desc_projet">Avis :</label>
+                    <input type="text" id="avis" name="avis">
+                </div>
+
+                <button type="submit" class="btn-submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</article>
+
+{% endblock %}

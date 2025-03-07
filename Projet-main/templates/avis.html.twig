@@ -1,0 +1,91 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block content %}
+<style>
+/* Applique un style sur le texte dans .card-body pour qu'il reste sur une seule ligne */
+.card-body h5, .card-body p {
+  white-space: nowrap; /* Empêche la rupture du texte en plusieurs lignes */
+  overflow: hidden;    /* Cacher le texte qui dépasse si nécessaire */
+  text-overflow: ellipsis; /* Utilise des "..." si le texte dépasse */
+}
+
+.card:hover .card-body h5 {
+  font-size: 24px;
+  color: #d8b7a6; /* Couleur du texte */
+  font-weight: bold; /* Texte en gras */
+  white-space: nowrap; /* Assure que le texte ne sera pas redécoupé */
+}
+
+.card:hover .card-body p {
+  font-size: 20px;
+  font-weight: bold; /* Texte en gras */
+  white-space: nowrap; /* Empêche la rupture du texte sur plusieurs lignes */
+  margin: 0;
+  padding: 0;
+}
+
+/* Pour éviter les marges et paddings supplémentaires */
+.card-body {
+  padding: 0; /* Retirer les paddings du body de la carte */
+}
+
+.card-title {
+  color: white; /* Couleur initiale du titre */
+  font-weight: bold;
+  white-space: nowrap; /* Empêche de couper le texte */
+}
+
+/* Effet de zoom sur l'image au survol */
+.card-img-top {
+  transition: transform 0.3s ease; /* Ajout d'une transition fluide */
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.1); /* Zoom sur l'image à 110% de sa taille d'origine */
+}
+
+/* Ajustements pour l'apparence de la carte */
+.card {
+  position: relative;
+  overflow: hidden; /* Assure que l'image ne dépasse pas du conteneur */
+}
+
+</style>
+
+<article >
+  <h1 class="text-center">Page d'avis</h1>
+  <br>
+  <div class="row">
+
+    <!-- Première colonne -->
+    <div class="col-md-6 d-flex flex-column align-items-center" style="height: 400px;">
+      <div class="card" style="width: 100%; height: 100%; position: relative;">
+        <a href="donnerAvis.php" class="d-block text-decoration-none" style="height: 100%; display: flex; flex-direction: column; position: relative;">
+          <img src="images/laisseAvis.png" class="card-img-top" alt="Image" style="width: 100%; height: 100%; object-fit: cover;">
+          <div class="card-body text-center" style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 1; color: white;">
+            <h5 class="card-title">Donner un avis</h5>
+            <p class="card-text">Pour donner un avis sur un établissement visité.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Deuxième colonne -->
+    <div class="col-md-6 d-flex flex-column align-items-center" style="height: 400px; margin:0px">
+      <div class="card" style="width: 100%; height: 100%; position: relative;">
+        <a href="voirAvis.php" class="d-block text-decoration-none" style="height: 100%; display: flex; flex-direction: column; position: relative;">
+          <img src="images/cinq-etoiles.png" class="card-img-top" alt="Image" style="width: 100%; height: 100%; object-fit: cover;">
+          <div class="card-body text-center" style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 1; color: white;">
+            <h5 class="card-title">Rechercher un établissement</h5>
+            <p class="card-text">Pour rechercher les établissements les mieux notés.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  
+</article>
+{% endblock %}

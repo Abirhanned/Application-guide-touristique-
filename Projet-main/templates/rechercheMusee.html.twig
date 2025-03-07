@@ -1,0 +1,122 @@
+{% extends 'bases.html.twig' %}
+
+{% block title %}Recherche de Musées{% endblock %}
+
+{% block content %}
+   <div class="container mt-4">
+    <h1 class="text-center">Recherche de Musées</h1>
+
+    <!-- Formulaire de recherche -->
+    <form id="search-form" class="d-flex justify-content-between my-4 gap-2 flex-wrap">
+        <!-- Sélection de la ville -->
+        <input type="text" id="search-ville" class="form-control rounded-pill shadow-sm" placeholder="Rechercher par ville">
+
+        <!-- Sélection du thème -->
+     <select id="search-theme" class="form-control rounded-pill shadow-sm">
+    <option value="">Sélectionner un thème</option>
+    {% for theme in themes %}
+        <option value="{{ theme }}">{{ theme }}</option>
+    {% endfor %}
+    </select>
+
+        <!-- Sélection du nom -->
+        <input type="text" id="search-nom" class="form-control rounded-pill shadow-sm" placeholder="Rechercher par nom">
+        
+        <button type="submit" class="btn btn-primary rounded-pill px-4">Rechercher</button>
+    </form>
+
+    <!-- Conteneur des résultats -->
+    <div id="results-container" class="mt-4">
+        <div id="results-list" class="row gy-4" style="display: none;">
+            <!-- Les résultats seront injectés ici -->
+        </div>
+        <div id="no-results" class="alert alert-warning text-center" style="display: none;">Aucun musée trouvé.</div>
+        <nav id="pagination" style="display: none;" class="d-flex justify-content-center mt-4">
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('search-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const ville = document.getElementById('search-ville').value.toLowerCase();
+        const theme = document.getElementById('search-theme').value.toLowerCase();
+        const nom = document.getElementById('search-nom').value.toLowerCase();
+
+        const resultsContainer = document.getElementById('results-container');
+        const noResults = document.getElementById('no-results');
+        const resultsList = document.getElementById('results-list');
+        const pagination = document.getElementById('pagination');
+
+        resultsList.style.display = 'none';
+        pagination.style.display = 'none';
+        noResults.style.display = 'none';
+
+        resultsList.innerHTML = ''; // Réinitialiser les résultats
+        const musees = {{ musees|json_encode|raw }}; // Données injectées depuis PHP
+
+        // Filtrer les musées
+        const filteredMusees = musees.filter(musee => {
+            return (
+                (ville === '' || musee.ville.toLowerCase().includes(ville)) &&
+                (theme === '' || musee.themes.toLowerCase().includes(theme)) &&  // Changer de `theme` à `themes`
+                (nom === '' || musee.nom.toLowerCase().includes(nom))
+            );
+        });
+
+        if (filteredMusees.length === 0) {
+            noResults.style.display = 'block';
+        } else {
+            const perPage = 20; // Nombre de musées par page
+            const totalPages = Math.ceil(filteredMusees.length / perPage);
+
+            function showPage(page) {
+                resultsList.style.display = 'flex';
+                resultsList.innerHTML = '';
+                const start = (page - 1) * perPage;
+                const end = start + perPage;
+                filteredMusees.slice(start, end).forEach(musee => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    col.innerHTML = ` 
+                        <div class="card p-3">
+                            <h5><a href="details.php?type=musees&id=${musee.id}" class="text-decoration-none">${musee.nom}</a></h5>
+                            <p>${musee.ville} - ${musee.theme}</p>
+                            <p><small>${musee.telephone}</small></p>
+                            <a href="${musee.site_web}" target="_blank" class="btn btn-link">Site web</a>
+                        </div>`; // Fermeture de la div.card
+                    resultsList.appendChild(col);
+                });
+            }
+
+            function createPagination() {
+                pagination.style.display = 'block';
+                const paginationUl = pagination.querySelector('ul');
+                paginationUl.innerHTML = '';
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const li = document.createElement('li');
+                    li.className = 'page-item';
+                    li.innerHTML = `<a href="#" class="page-link">${i}</a>`;
+                    li.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        showPage(i);
+                        paginationUl.querySelectorAll('.page-item').forEach(item => item.classList.remove('active'));
+                        li.classList.add('active');
+                    });
+                    paginationUl.appendChild(li);
+                }
+
+                paginationUl.querySelector('.page-item').classList.add('active');
+            }
+
+            createPagination();
+            showPage(1);
+        }
+    });
+</script>
+
+{% endblock %}
